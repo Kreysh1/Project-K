@@ -11,6 +11,8 @@ public class InventoryManager : MonoBehaviour
     public GameObject inventoryItemPrefab;
     public GameObject MainInventory;
 
+    public Item[] itemsToPickup;
+
     int selectedSlot = -1;
 
     private void Awake() {
@@ -45,17 +47,13 @@ public class InventoryManager : MonoBehaviour
             } 
         }
 
-        // if(Input.GetKeyDown(KeyCode.I)){
+        if(Input.GetKeyDown(KeyCode.O)){
+            AddItem(itemsToPickup[0]);
+        }
 
-        // }
-
-        // if(Input.GetKeyDown(KeyCode.O)){
-            
-        // }
-
-        // if(Input.GetKeyDown(KeyCode.P)){
-            
-        // }
+        if(Input.GetKeyDown(KeyCode.P)){
+            AddItem(itemsToPickup[1]);
+        }
 
     }
 
@@ -72,8 +70,8 @@ public class InventoryManager : MonoBehaviour
         for (int i=0; i<inventorySlots.Length; i++){
             InventorySlot slot = inventorySlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
-            if((itemInSlot != null) && (itemInSlot == item) && (itemInSlot.count < maxStackedItems) && (itemInSlot.item.stackable == true)){
-                SpawnNewItem(item, slot);
+
+            if((itemInSlot != null) && (itemInSlot.item == item) && (itemInSlot.count <= maxStackedItems) && (itemInSlot.item.stackable == true)){
                 itemInSlot.count++;
                 itemInSlot.RefreshCount();
                 return true;
