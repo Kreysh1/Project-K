@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
 
     /* ============== VARIABLES ============== */
     private bool isWalking;
+    private bool isJumping;
+    private bool isGrounded;
     private Vector3 moveDir;
     private Vector3 camRight;
     private Vector3 camForward;
@@ -77,18 +79,14 @@ public class Player : MonoBehaviour
 
         CamDirection();
 
-        // Rotate the player
-        // transform.LookAt(transform.position + moveDir);
+        // Rotate the player smoothly
+
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotationSpeed);
 
         SetGravity();
 
         // Move the player
         characterController.Move(moveDir * moveSpeed * Time.deltaTime);
-
-        if (isWalking){
-        } 
-
     }
 
     private void SetGravity(){
@@ -115,17 +113,39 @@ public class Player : MonoBehaviour
     }
 
     private void Jump(){
+
+        // Check if character is grounded
+        isGrounded = characterController.isGrounded;
+        isJumping = !characterController.isGrounded;
+
         if (characterController.isGrounded && Input.GetButtonDown("Jump")){
             fallVelocity = jumpForce;
             moveDir.y = fallVelocity;
         }
     }
 
-
-
     public bool IsWalking(){
         return isWalking;
     }
+
+    public bool IsJumping(){
+        return isJumping;
+    }
+
+    public bool IsGrounded(){
+        return isGrounded;
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        var item = other.GetComponent<InventoryItem>();
+
+        if(item){
+
+        }
+    }
+
+
+
 
 }
 

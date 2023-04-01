@@ -6,7 +6,6 @@ public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager instance;
 
-    public int maxStackedItems = 5;
     public InventorySlot[] inventorySlots;
     public GameObject inventoryItemPrefab;
     public GameObject MainInventory;
@@ -71,7 +70,7 @@ public class InventoryManager : MonoBehaviour
             InventorySlot slot = inventorySlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
 
-            if((itemInSlot != null) && (itemInSlot.item == item) && (itemInSlot.count <= maxStackedItems) && (itemInSlot.item.stackable == true)){
+            if((itemInSlot != null) && (itemInSlot.item == item) && (itemInSlot.count < itemInSlot.item.maxStackedItems) && (itemInSlot.item.stackable == true)){
                 itemInSlot.count++;
                 itemInSlot.RefreshCount();
                 return true;
