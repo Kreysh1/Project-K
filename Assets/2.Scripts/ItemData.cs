@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[CreateAssetMenu(menuName = "Scriptable object/Item")]
-public class Item: ScriptableObject{
+[CreateAssetMenu(menuName = "Scriptable object/Item Data")]
+public class ItemData: ScriptableObject{
 
     [Header("Only gameplay")]
     public int id;

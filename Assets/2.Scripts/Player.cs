@@ -136,17 +136,6 @@ public class Player : MonoBehaviour
         return isGrounded;
     }
 
-    private void OnTriggerEnter(Collider other) {
-        var item = other.GetComponent<InventoryItem>();
-
-        if(item){
-
-        }
-    }
-
-
-
-
 }
 
 

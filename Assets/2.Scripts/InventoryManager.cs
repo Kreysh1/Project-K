@@ -10,7 +10,7 @@ public class InventoryManager : MonoBehaviour
     public GameObject inventoryItemPrefab;
     public GameObject MainInventory;
 
-    public Item[] itemsToPickup;
+    public ItemData[] itemsToPickup;
 
     int selectedSlot = -1;
 
@@ -64,13 +64,13 @@ public class InventoryManager : MonoBehaviour
         selectedSlot = newValue;
     }
 
-    public bool AddItem(Item item){
+    public bool AddItem(ItemData item){
         // Check if any slot has the same item with count lower than max
         for (int i=0; i<inventorySlots.Length; i++){
             InventorySlot slot = inventorySlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
 
-            if((itemInSlot != null) && (itemInSlot.item == item) && (itemInSlot.count < itemInSlot.item.maxStackedItems) && (itemInSlot.item.stackable == true)){
+            if((itemInSlot != null) && (itemInSlot.itemData == item) && (itemInSlot.count < itemInSlot.itemData.maxStackedItems) && (itemInSlot.itemData.stackable == true)){
                 itemInSlot.count++;
                 itemInSlot.RefreshCount();
                 return true;
@@ -90,17 +90,17 @@ public class InventoryManager : MonoBehaviour
         return false;
     }
 
-    public void SpawnNewItem(Item item, InventorySlot slot){
+    public void SpawnNewItem(ItemData item, InventorySlot slot){
         GameObject newItemObject = Instantiate(inventoryItemPrefab, slot.transform);
         InventoryItem inventoryItem = newItemObject.GetComponent<InventoryItem>();
         inventoryItem.InitialiseItem(item);
     }
 
-    public Item GetSelectedItem(bool use){
+    public ItemData GetSelectedItem(bool use){
         InventorySlot slot = inventorySlots[selectedSlot];
         InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
         if(itemInSlot != null){
-            Item item = itemInSlot.item;
+            ItemData item = itemInSlot.itemData;
             if (use == true){
                 itemInSlot.count--;
                 if(itemInSlot.count <= 0){

@@ -28,5 +28,20 @@ public class InventorySlot : MonoBehaviour, IDropHandler
             InventoryItem inventoryItem = dropped.GetComponent<InventoryItem>();
             inventoryItem.parentAfterDrag = transform;
         }
+        else{
+            //Getting InventoryItem GameObject that is in the target InventorySlot.
+            GameObject targetInventoryItem = transform.GetChild(0).gameObject;
+            //print(targetInventoryItem);
+            InventoryItem itemToSwap = targetInventoryItem.GetComponent<InventoryItem>();
+
+            // Dropped InventoryItem GameObject
+            GameObject dropped = eventData.pointerDrag;
+            // print(dropped);
+            InventoryItem inventoryItem = dropped.GetComponent<InventoryItem>();
+
+            // Items Swap
+            itemToSwap.transform.SetParent(inventoryItem.parentAfterDrag);
+            inventoryItem.parentAfterDrag = transform;
+        }
     }
 }

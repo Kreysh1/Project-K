@@ -11,17 +11,17 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public Text countText;
 
     [HideInInspector] public Transform parentAfterDrag;
-    // [HideInInspector] public Item item;
-    public Item item;
+    // [HideInInspector] public Item itemData;
+    [HideInInspector] public ItemData itemData;
     [HideInInspector] public int count = 1;
 
     // Manualy instanciate items... Should be commented when loot system is working.
     private void Start() {
-        InitialiseItem(item);
+        InitialiseItem(itemData);
     }
 
-    public void InitialiseItem(Item newItem){
-        item = newItem; 
+    public void InitialiseItem(ItemData newItem){
+        itemData = newItem; 
         image.sprite = newItem.image;
         RefreshCount();
     }
