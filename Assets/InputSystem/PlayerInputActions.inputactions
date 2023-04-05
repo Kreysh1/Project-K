@@ -22,6 +22,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Run",
+                    "type": "Button",
+                    "id": "7fa4be7d-a02e-4504-95da-738f9306f6d0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pointer",
+                    "type": "Value",
+                    "id": "aed40384-f6a9-41cd-8572-4901731b333b",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -92,57 +110,68 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "Arrows",
-                    "id": "cbf0b6ee-dbe3-4b27-8291-b8ec1997c262",
+                    "name": "",
+                    "id": "502a31d9-1b6d-425b-ba74-729cf488d9ac",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "c44e8166-bfc9-4894-adaf-ff3b6b1f1b29",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "Pointer",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "up",
-                    "id": "69ea38c2-e80e-41fe-8248-8ceb38ff12c4",
+                    "id": "20d3fc89-db28-4382-b872-50a2afbff5c2",
                     "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "Pointer",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "down",
-                    "id": "73deb559-fb00-46d9-b520-18d686c6467c",
+                    "id": "51267be5-e6c6-4e04-90c0-0d403c598bc7",
                     "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "Pointer",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "left",
-                    "id": "e88049be-8408-455f-a80d-8349e31bda02",
+                    "id": "3143253c-1e2d-4b87-a7a9-019bb27a02ae",
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "Pointer",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "right",
-                    "id": "6dfe093b-2f55-4e31-84ee-77add0f91388",
+                    "id": "ce59b342-8db7-4ea2-962b-2f1e79e32e13",
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "Pointer",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }

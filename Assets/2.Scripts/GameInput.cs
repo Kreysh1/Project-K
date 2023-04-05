@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 
 public class GameInput : MonoBehaviour
@@ -12,14 +13,7 @@ public class GameInput : MonoBehaviour
     private void Awake() {
         playerInputActions=  new PlayerInputActions();
         playerInputActions.Player.Enable();
-
-        // playerInputActions.Player.Jump.performed += Jump_performed;
     }
-
-    // public void Jump_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj){
-    //     Debug.Log(obj);
-    //     OnJumpAction?.Invoke(this, EventArgs.Empty);
-    // }
     
     public Vector2 GetMovementVectorNormalized(){
 
@@ -29,4 +23,12 @@ public class GameInput : MonoBehaviour
 
         return inputVector;
     }
+
+    public bool OnJump(){
+        return playerInputActions.Player.Jump.triggered;
+    }
+
+    public bool OnRun(){
+        return playerInputActions.Player.Run.IsInProgress();
+    } 
 }

@@ -10,7 +10,8 @@ public class Player : MonoBehaviour
     /* ============== SHOWN ON INSPECTOR ============== */
     [Header("Player")]
     [Tooltip("Move Speed of the character")]
-    [SerializeField] private float moveSpeed;
+    [SerializeField] private float walkSpeed;
+    [SerializeField] private float runSpeed;
 
     // [Tooltip("Sprint Speed of the character")]
     // [SerializeField] private float sprintSpeed = 10f;
@@ -47,21 +48,7 @@ public class Player : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         playerRigidBody = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
-
-        // Lock and hide the cursor.
-        // Cursor.lockState = CursorLockMode.Locked;
-        // Cursor.visible = false;
     }
-
-    // private void Start() {
-    //     gameInput.OnJumpAction += GameInput_OnJumpAction;
-    // }
-
-    // private void GameInput_OnJumpAction(object sender, System.EventArgs e){
-    //     Debug.Log("hasJump");
-    //     playerRigidBody.AddForce(Vector3.up * 5f, ForceMode.Impulse);
-    // }
-
 
     private void Update() {
         MoveWithCharacterController();
@@ -80,13 +67,19 @@ public class Player : MonoBehaviour
         CamDirection();
 
         // Rotate the player smoothly
-
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotationSpeed);
 
         SetGravity();
 
-        // Move the player
-        characterController.Move(moveDir * moveSpeed * Time.deltaTime);
+        if(gameInput.OnRun()){
+            // Running
+            characterController.Move(moveDir * runSpeed * Time.deltaTime);
+        }
+        else{
+            // Walking
+            characterController.Move(moveDir * walkSpeed * Time.deltaTime);
+        }
+        
     }
 
     private void SetGravity(){
@@ -113,17 +106,17 @@ public class Player : MonoBehaviour
     }
 
     private void Jump(){
-
         // Check if character is grounded
         isGrounded = characterController.isGrounded;
         isJumping = !characterController.isGrounded;
 
-        if (characterController.isGrounded && Input.GetButtonDown("Jump")){
+        if (characterController.isGrounded && gameInput.OnJump()){
             fallVelocity = jumpForce;
             moveDir.y = fallVelocity;
         }
     }
 
+    // BOOLEANS OF ANIMATIONS
     public bool IsWalking(){
         return isWalking;
     }
@@ -137,31 +130,3 @@ public class Player : MonoBehaviour
     }
 
 }
-
-
-
-    // private void MoveWithTransform(){
-    //     // Gets a normalized Vector2 from GameInput Class.
-    //     Vector2 inputVector = gameInput.GetMovementVectorNormalized();
-
-    //     // Define movement direction using inputVector and cameraObject(forward & right) Vector2 references.
-    //     moveDir = inputVector.x * cameraObject.right + inputVector.y * cameraObject.forward;
-
-    //     // Check if character is walking
-    //     isWalking = (moveDir != Vector3.zero);
-
-    //     if (isWalking){
-    //         // Move the player
-    //         transform.position += moveDir * moveSpeed * Time.deltaTime;
-
-    //         // Rotate the player
-    //         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotationSpeed);
-    //     } 
-    // }
-
-    // private void Jump(InputAction.CallbackContext context){
-    //     // Debug.Log("Jump" + context.phase);
-    //     if (context.performed){
-    //         playerRigidBody.AddForce(Vector3.up * 5f, ForceMode.Impulse);
-    //     }
-    // }
