@@ -14832,10 +14832,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4afe2241a04ea4f81ca840d8691e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  globalVolume: {fileID: 1067904496}
   targetTransform: {fileID: 1045927064}
   cinemachineVirtualCamera: {fileID: 1488844571}
   fieldofViewMax: 60
-  fieldofViewMin: 10
+  fieldofViewMin: 20
+  rotateSpeed: 50
 --- !u!4 &1309145419
 Transform:
   m_ObjectHideFlags: 0
@@ -15800,7 +15802,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1488844570}
-  m_LocalRotation: {x: 0.22975291, y: 0.0000000187227, z: -0.0000000044198294, w: 0.973249}
+  m_LocalRotation: {x: 0.22975291, y: -0.0000000187227, z: 0.0000000044198294, w: 0.973249}
   m_LocalPosition: {x: 0, y: 6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19768,11 +19770,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8592567289745726659, guid: c9631751766ea0149864ee2b7651a2b4, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000187227
+      value: -0.0000000187227
       objectReference: {fileID: 0}
     - target: {fileID: 8592567289745726659, guid: c9631751766ea0149864ee2b7651a2b4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000044198294
+      value: 0.0000000044198294
       objectReference: {fileID: 0}
     - target: {fileID: 8592567289745726659, guid: c9631751766ea0149864ee2b7651a2b4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

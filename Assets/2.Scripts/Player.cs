@@ -7,17 +7,16 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class Player : MonoBehaviour
 {
-    /* ============== SHOWN ON INSPECTOR ============== */
+    /* ============== SHOWN IN INSPECTOR ============== */
     [Header("Player")]
     [Tooltip("Move Speed of the character")]
-    [SerializeField] private float walkSpeed;
-    [SerializeField] private float runSpeed;
+    [SerializeField] private float walkSpeed = 8f;
 
-    // [Tooltip("Sprint Speed of the character")]
-    // [SerializeField] private float sprintSpeed = 10f;
+    [Tooltip("Run Speed of the character")]
+    [SerializeField] private float runSpeed = 12f;
 
     [Tooltip("How much character can jump")]
-    [SerializeField] private float jumpForce;
+    [SerializeField] private float jumpForce = 2.5f;
 
     [Tooltip("How fast the character turns to face movement direction")]
     [Range(3f, 10f)]
@@ -30,19 +29,21 @@ public class Player : MonoBehaviour
     [SerializeField] private GameInput gameInput;
     [SerializeField] private Transform cameraObject;
 
-    /* ============== COMPONENTS REFERENCES ============== */
+    /* ============== PLAYER COMPONENTS ============== */
     private CharacterController characterController;
     private Rigidbody playerRigidBody;
     private PlayerInput playerInput;
 
     /* ============== VARIABLES ============== */
-    private bool isWalking;
-    private bool isJumping;
-    private bool isGrounded;
     private Vector3 moveDir;
     private Vector3 camRight;
     private Vector3 camForward;
     private float fallVelocity;
+
+    /* ============== ANIMATION BOOLEANS ============== */
+    private bool isWalking;
+    private bool isJumping;
+    private bool isGrounded;
 
     private void Awake() {
         characterController = GetComponent<CharacterController>();

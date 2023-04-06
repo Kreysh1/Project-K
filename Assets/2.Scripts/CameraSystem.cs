@@ -1,33 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class CameraSystem : MonoBehaviour
 {
-
+    [Header("References")]
+    [SerializeField] GameObject globalVolume;
     [SerializeField] private Transform targetTransform;
     [SerializeField] private CinemachineVirtualCamera cinemachineVirtualCamera;
-    [SerializeField] private float fieldofViewMax = 60f;
-    [SerializeField] private float fieldofViewMin = 10f;
 
+    [Header("Controls")]
+    [SerializeField] private float fieldofViewMax = 60f;
+    [SerializeField] private float fieldofViewMin = 20f;
+    [SerializeField] private float rotateSpeed = 50f;
+
+    float targetFieldofView = 60f;
     float followOffsetMax = 20f;
     float followOffsetMin = 0f;
     float verticalRotation = 5f;
-    float rotateSpeed = 50f;
-    float targetFieldofView = 60f;
     bool dragRotationFlag = false;
     Vector2 lastMousePosition;
     CinemachineTransposer cinemachineTransposer;
+    DepthOfField dofComponent;
 
     private void Start() {
         cinemachineTransposer = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineTransposer>();
+        Volume volume = globalVolume.GetComponent<Volume>();
+        DepthOfField tmp;
+        if (volume.profile.TryGet<DepthOfField>(out tmp))
+        {
+            dofComponent = tmp;
+        }
     }
 
     private void Update() {
         FollowTargetPosition();
         HandleCameraRotation();
         HandleCameraZoom();
+        DoFOnCloseUp();
     }
 
     private void HandleCameraRotation(){
@@ -78,7 +89,7 @@ public class CameraSystem : MonoBehaviour
         transform.position = targetTransform.position;
     }
 
-    // ? I'm manipulating the POV value to simulate the Zoom, should i implement this changing the cinemachineTransposer.m_FollowOffset.z value instead?
+    // ? I'm manipulating the FOV value to simulate the Zoom, should i implement this changing the cinemachineTransposer.m_FollowOffset.z value instead?
     private void HandleCameraZoom(){
         if(Input.mouseScrollDelta.y < 0){
             targetFieldofView += 2;
@@ -88,7 +99,15 @@ public class CameraSystem : MonoBehaviour
         }
 
         targetFieldofView = Mathf.Clamp(targetFieldofView, fieldofViewMin, fieldofViewMax);
-        
         cinemachineVirtualCamera.m_Lens.FieldOfView = targetFieldofView;
+    }
+
+    private void DoFOnCloseUp(){
+        if(cinemachineVirtualCamera.m_Lens.FieldOfView <= 30f){
+            dofComponent.gaussianEnd = new MinFloatParameter(20f, 0f, true);
+        }
+        else{
+            dofComponent.gaussianEnd = new MinFloatParameter(130f, 0f, true);
+        }
     }
 }
