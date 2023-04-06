@@ -12,7 +12,7 @@ public class CameraSystem : MonoBehaviour
 
     [Header("Controls")]
     [SerializeField] private float fieldofViewMax = 60f;
-    [SerializeField] private float fieldofViewMin = 20f;
+    [SerializeField] private float fieldofViewMin = 30f;
     [SerializeField] private float rotateSpeed = 50f;
 
     float targetFieldofView = 60f;
@@ -103,7 +103,7 @@ public class CameraSystem : MonoBehaviour
     }
 
     private void DoFOnCloseUp(){
-        if(cinemachineVirtualCamera.m_Lens.FieldOfView <= 30f){
+        if(cinemachineVirtualCamera.m_Lens.FieldOfView <= 40f){
             dofComponent.gaussianEnd = new MinFloatParameter(20f, 0f, true);
         }
         else{
