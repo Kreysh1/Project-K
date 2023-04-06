@@ -20102,11 +20102,23 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 101098476}
     - target: {fileID: 4412157526270194404, guid: dab7cbe23eab263468ceae0656ba4f77, type: 3}
+      propertyPath: manaBar
+      value: 
+      objectReference: {fileID: 1224870152}
+    - target: {fileID: 4412157526270194404, guid: dab7cbe23eab263468ceae0656ba4f77, type: 3}
       propertyPath: gameInput
       value: 
       objectReference: {fileID: 106406593}
     - target: {fileID: 4412157526270194404, guid: dab7cbe23eab263468ceae0656ba4f77, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 101098476}
+    - target: {fileID: 4412157526270194404, guid: dab7cbe23eab263468ceae0656ba4f77, type: 3}
       propertyPath: cameraObject
+      value: 
+      objectReference: {fileID: 963194228}
+    - target: {fileID: 4412157526270194404, guid: dab7cbe23eab263468ceae0656ba4f77, type: 3}
+      propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 963194228}
     - target: {fileID: 6082242157637772529, guid: dab7cbe23eab263468ceae0656ba4f77, type: 3}
@@ -20163,6 +20175,8 @@ PrefabInstance:
       objectReference: {fileID: 1224870152}
     m_RemovedComponents:
     - {fileID: 2134363263892239185, guid: dab7cbe23eab263468ceae0656ba4f77, type: 3}
+    - {fileID: 4252065271355761010, guid: dab7cbe23eab263468ceae0656ba4f77, type: 3}
+    - {fileID: 8087861952855142099, guid: dab7cbe23eab263468ceae0656ba4f77, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

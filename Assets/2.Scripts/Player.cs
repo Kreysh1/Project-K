@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,8 +5,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class Player : MonoBehaviour
 {
-    /* ============== SHOWN IN INSPECTOR ============== */
-    [Header("Player")]
+    /* ============== INSPECTOR MOVEMENT ============== */
+    [Header("Movement")]
     [Tooltip("Move Speed of the character")]
     [SerializeField] private float walkSpeed = 8f;
 
@@ -25,9 +23,18 @@ public class Player : MonoBehaviour
     [Tooltip("Gravity Acceleration")]
     [SerializeField] private float gravity = -9.8f;
 
+    /* ============== INSPECTOR STATS ============== */
+    [Header("Statistics")]
+    [SerializeField] private int level = 1;
+    [SerializeField] private int maxHealth = 100;
+    [SerializeField] private int maxMana = 100;
+
+    /* ============== INSPECTOR REFERENCES ============== */
     [Header("References")]
     [SerializeField] private GameInput gameInput;
-    [SerializeField] private Transform cameraObject;
+    [SerializeField] private Transform cameraTransform;
+    [SerializeField] private HealthBar healthBar;
+    [SerializeField] private ManaBar manaBar;
 
     /* ============== PLAYER COMPONENTS ============== */
     private CharacterController characterController;
@@ -39,6 +46,8 @@ public class Player : MonoBehaviour
     private Vector3 camRight;
     private Vector3 camForward;
     private float fallVelocity;
+    private int currentHealth;
+    private int currentMana;
 
     /* ============== ANIMATION BOOLEANS ============== */
     private bool isWalking;
@@ -51,11 +60,23 @@ public class Player : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
     }
 
+    private void Start() {
+        // Initialize Health
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+        // Initialize Mana
+        currentMana = maxMana;
+        manaBar.SetMaxMana(maxMana);
+    }
+
     private void Update() {
         MoveWithCharacterController();
         Jump(); 
-    }   
+    }
 
+
+
+    /* ============== MOVEMENT CODE ============== */
     private void MoveWithCharacterController(){
         // Gets a normalized Vector2 from GameInput Class.
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
@@ -96,8 +117,8 @@ public class Player : MonoBehaviour
     }
 
     private void CamDirection(){
-        camRight = cameraObject.right;
-        camForward = cameraObject.forward;
+        camRight = cameraTransform.right;
+        camForward = cameraTransform.forward;
 
         camRight.y = 0;
         camForward.y = 0;
@@ -130,4 +151,14 @@ public class Player : MonoBehaviour
         return isGrounded;
     }
 
+    /* ============== STATS CODE ============== */
+    private void TakeDamage(int _damage){
+        currentHealth -= _damage;
+        healthBar.SetHealth(currentHealth);
+    }
+
+    private void ConsumeMana(int _mana){
+        currentMana -= _mana;
+        manaBar.SetMana(currentMana);
+    }
 }
