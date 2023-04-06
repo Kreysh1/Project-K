@@ -20,7 +20,7 @@ public class HealthSystem : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
     }
 
-    void TakeDamage(int _damage){
+    public void TakeDamage(int _damage){
         currentHealth -= _damage;
         healthBar.SetHealth(currentHealth);
     }
