@@ -9,6 +9,7 @@ public class InventoryManager : MonoBehaviour
     public InventorySlot[] inventorySlots;
     public GameObject inventoryItemPrefab;
     public GameObject MainInventory;
+    public GameObject CharacterInfo;
 
     public ItemData[] itemsToPickup;
 
@@ -19,33 +20,43 @@ public class InventoryManager : MonoBehaviour
     }
 
     private void Start() {
-        // Starts with the Toolbar's first item selected
-        ChangeSelectedSlot(0);
+        // // Starts with the Toolbar's first item selected
+        // ChangeSelectedSlot(0);
     }
 
     private void Update() {
-        // TODO: Refactor this. Use a more efficient method...
-        // Checks if the input is a number and then changes the selected item
-        if (Input.inputString != null){
-            bool isNumber = int.TryParse(Input.inputString, out int number);
-            if(isNumber && number > 0 && number <= 9){
-                ChangeSelectedSlot(number -1);
-            }
-            if(isNumber && number == 0){
-                ChangeSelectedSlot(9);
-            }
-        }
+        // // TODO: Refactor this. Use a more efficient method...
+        // // Checks if the input is a number and then changes the selected item
+        // if (Input.inputString != null){
+        //     bool isNumber = int.TryParse(Input.inputString, out int number);
+        //     if(isNumber && number > 0 && number <= 9){
+        //         ChangeSelectedSlot(number -1);
+        //     }
+        //     if(isNumber && number == 0){
+        //         ChangeSelectedSlot(9);
+        //     }
+        // }
 
-        //Open Inventory
+        //Show Main Inventory Window
         if(Input.GetKeyDown(KeyCode.B)){
-            if(MainInventory.activeSelf == true){
-                MainInventory.SetActive(false);
-            }
-            else{
-                MainInventory.SetActive(true);
-            } 
+            // if(MainInventory.activeSelf == true){
+            //     MainInventory.SetActive(false);
+            // }
+            // else{
+            //     MainInventory.SetActive(true);
+            // } 
+            bool isActive = MainInventory.activeSelf ? false : true;
+            MainInventory.SetActive(isActive);
         }
 
+        //Show Character Window
+        if(Input.GetKeyDown(KeyCode.C)){
+            bool isActive = CharacterInfo.activeSelf ? false : true;
+            CharacterInfo.SetActive(isActive);
+        }
+
+
+        // Add Items to Main Inventory
         if(Input.GetKeyDown(KeyCode.O)){
             AddItem(itemsToPickup[0]);
         }
@@ -56,13 +67,13 @@ public class InventoryManager : MonoBehaviour
 
     }
 
-    private void ChangeSelectedSlot(int newValue){
-        if(selectedSlot >= 0){
-            inventorySlots[selectedSlot].Deselect();
-        }
-        inventorySlots[newValue].Select();
-        selectedSlot = newValue;
-    }
+    // private void ChangeSelectedSlot(int newValue){
+    //     if(selectedSlot >= 0){
+    //         inventorySlots[selectedSlot].Deselect();
+    //     }
+    //     inventorySlots[newValue].Select();
+    //     selectedSlot = newValue;
+    // }
 
     public bool AddItem(ItemData item){
         // Check if any slot has the same item with count lower than max
