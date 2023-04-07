@@ -36,16 +36,14 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         if(other.CompareTag("Player")){
-            HealthSystem healthSystem = other.GetComponent<HealthSystem>();
-            print("Player Tag Triggered");
-            if(healthSystem != null){
-                healthSystem.TakeDamage(damage);
+            Player player = other.GetComponent<Player>();
+            if(player != null){
+                player.TakeDamage(damage);
             }
         }
     }
 
     void ChaseTarget(){
         navMeshAgent.SetDestination(target.position);
-        // transform.LookAt(target.position);
     }
 }

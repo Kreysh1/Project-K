@@ -30,6 +30,10 @@ public class ProgressBar : MonoBehaviour
     public Image fill;
     public Color color;
 
+    private void Start() {
+        SetCurrentValue(currentValue);
+    }
+
     private void Update() {
         GetCurrentFill();
     }
@@ -44,5 +48,13 @@ public class ProgressBar : MonoBehaviour
 
         // float fillAmount = (float)currentValue/(float)maxValue;
         // mask.fillAmount = fillAmount;
+    }
+
+    public void SetCurrentValue(int _currentValue){
+        currentValue = _currentValue;
+    }
+
+    public void SetMaxValue(int _maxValue){
+        maxValue = _maxValue;
     }
 }

@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     /* ============== INSPECTOR STATS ============== */
     [Header("Statistics")]
     [SerializeField] private int level = 1;
+    [SerializeField] private int experienceNeeded = 100;
     [SerializeField] private int maxHealth = 100;
     [SerializeField] private int maxMana = 100;
 
@@ -33,8 +34,9 @@ public class Player : MonoBehaviour
     [Header("References")]
     [SerializeField] private GameInput gameInput;
     [SerializeField] private Transform cameraTransform;
-    [SerializeField] private HealthBar healthBar;
-    [SerializeField] private ManaBar manaBar;
+    [SerializeField] private ProgressBar healthBar;
+    [SerializeField] private ProgressBar manaBar;
+    [SerializeField] private ProgressBar expBar;
 
     /* ============== PLAYER COMPONENTS ============== */
     private CharacterController characterController;
@@ -48,6 +50,7 @@ public class Player : MonoBehaviour
     private float fallVelocity;
     private int currentHealth;
     private int currentMana;
+    private int currentExperience = 0;
 
     /* ============== ANIMATION BOOLEANS ============== */
     private bool isWalking;
@@ -63,18 +66,16 @@ public class Player : MonoBehaviour
     private void Start() {
         // Initialize Health
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+        healthBar.SetMaxValue(maxHealth);
         // Initialize Mana
         currentMana = maxMana;
-        manaBar.SetMaxMana(maxMana);
+        manaBar.SetMaxValue(maxMana);
     }
 
     private void Update() {
         MoveWithCharacterController();
         Jump(); 
     }
-
-
 
     /* ============== MOVEMENT CODE ============== */
     private void MoveWithCharacterController(){
@@ -152,13 +153,18 @@ public class Player : MonoBehaviour
     }
 
     /* ============== STATS CODE ============== */
-    private void TakeDamage(int _damage){
+    public void TakeDamage(int _damage){
         currentHealth -= _damage;
-        healthBar.SetHealth(currentHealth);
+        healthBar.SetCurrentValue(currentHealth);
     }
 
-    private void ConsumeMana(int _mana){
+    public void ConsumeMana(int _mana){
         currentMana -= _mana;
-        manaBar.SetMana(currentMana);
+        manaBar.SetCurrentValue(currentMana);
+    }
+
+    public void GainExperience(int _expPoints){
+        currentExperience += _expPoints;
+        expBar.SetCurrentValue(currentExperience);
     }
 }
