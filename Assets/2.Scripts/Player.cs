@@ -66,10 +66,10 @@ public class Player : MonoBehaviour
     private void Start() {
         // Initialize Health
         currentHealth = maxHealth;
-        healthBar.SetMaxValue(maxHealth);
+        if(healthBar) healthBar.SetMaxValue(maxHealth);
         // Initialize Mana
         currentMana = maxMana;
-        manaBar.SetMaxValue(maxMana);
+        if(manaBar) manaBar.SetMaxValue(maxMana);
     }
 
     private void Update() {

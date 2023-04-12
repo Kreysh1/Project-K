@@ -13,6 +13,8 @@ public class CameraSystem : MonoBehaviour
     [Header("Controls")]
     [SerializeField] private float fieldofViewMax = 60f;
     [SerializeField] private float fieldofViewMin = 30f;
+    // [SerializeField] private float depthifFieldMax = 500f;
+    // [SerializeField] private float depthifFieldMin = 300f;
     [SerializeField] private float rotateSpeed = 50f;
 
     float targetFieldofView = 60f;
@@ -38,7 +40,7 @@ public class CameraSystem : MonoBehaviour
         FollowTargetPosition();
         HandleCameraRotation();
         HandleCameraZoom();
-        DoFOnCloseUp();
+        // DoFOnCloseUp();
     }
 
     private void HandleCameraRotation(){
@@ -102,12 +104,12 @@ public class CameraSystem : MonoBehaviour
         cinemachineVirtualCamera.m_Lens.FieldOfView = targetFieldofView;
     }
 
-    private void DoFOnCloseUp(){
-        if(cinemachineVirtualCamera.m_Lens.FieldOfView <= 40f){
-            dofComponent.gaussianEnd = new MinFloatParameter(20f, 0f, true);
-        }
-        else{
-            dofComponent.gaussianEnd = new MinFloatParameter(130f, 0f, true);
-        }
-    }
+    // private void DoFOnCloseUp(){
+    //     if(cinemachineVirtualCamera.m_Lens.FieldOfView <= 40f){
+    //         dofComponent.gaussianEnd = new MinFloatParameter(depthifFieldMin, 0f, true);
+    //     }
+    //     else{
+    //         dofComponent.gaussianEnd = new MinFloatParameter(depthifFieldMax, 0f, true);
+    //     }
+    // }
 }
