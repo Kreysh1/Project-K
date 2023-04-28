@@ -38,7 +38,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    // ! IT NEED AN UPGRADE...
+    // ! IT NEEDS AN UPGRADE...
     private void ChangePointerPosition(){
         Vector2 inputVector = playerInputActions.Player.Pointer.ReadValue<Vector2>();
         inputVector = inputVector.normalized;

@@ -253,7 +253,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
@@ -294,7 +294,7 @@ Transform:
   - {fileID: 6867726019154631554}
   - {fileID: 1350386403194078714}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &4727915177970716474
 CharacterController:
@@ -375,6 +375,7 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   manaBar: {fileID: 0}
   expBar: {fileID: 0}
+  popupTextPrefab: {fileID: 5523602456674391313, guid: e1a28fdf4146d6e4e92b57d0daa6532a, type: 3}
 --- !u!136 &7143450311492928931
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -179,6 +179,7 @@ public class Player : MonoBehaviour
     }
 
     private void showPopupTextPrefab(int _damage){
+        // Instantiate the Popup Text Prefab and set this transform as parent.
         GameObject popupText = Instantiate(popupTextPrefab, transform.position, Quaternion.identity, transform);
         popupText.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _damage.ToString();
     }
