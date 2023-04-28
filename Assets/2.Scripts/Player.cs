@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CharacterController))]
@@ -37,6 +38,7 @@ public class Player : MonoBehaviour
     [SerializeField] private ProgressBar healthBar;
     [SerializeField] private ProgressBar manaBar;
     [SerializeField] private ProgressBar expBar;
+    [SerializeField] private GameObject popupTextPrefab;
 
     /* ============== PLAYER COMPONENTS ============== */
     private CharacterController characterController;
@@ -154,8 +156,16 @@ public class Player : MonoBehaviour
 
     /* ============== STATS CODE ============== */
     public void TakeDamage(int _damage){
+        // Reduce the current health by the amount of damage sustained.
         currentHealth -= _damage;
+
+        // Sets the new current health value to the health bar.
         healthBar.SetCurrentValue(currentHealth);
+
+        // Triggers a popup text with the amount of damage sustained.
+        if(popupTextPrefab != null){
+            showPopupTextPrefab(_damage);
+        }
     }
 
     public void ConsumeMana(int _mana){
@@ -166,5 +176,10 @@ public class Player : MonoBehaviour
     public void GainExperience(int _expPoints){
         currentExperience += _expPoints;
         expBar.SetCurrentValue(currentExperience);
+    }
+
+    private void showPopupTextPrefab(int _damage){
+        GameObject popupText = Instantiate(popupTextPrefab, transform.position, Quaternion.identity, transform);
+        popupText.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _damage.ToString();
     }
 }
