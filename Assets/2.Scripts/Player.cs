@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CharacterController))]
@@ -38,7 +37,7 @@ public class Player : MonoBehaviour
     [SerializeField] private ProgressBar healthBar;
     [SerializeField] private ProgressBar manaBar;
     [SerializeField] private ProgressBar expBar;
-    [SerializeField] private GameObject popupTextPrefab;
+    [SerializeField] private PopupText popupTextPrefab;
 
     /* ============== PLAYER COMPONENTS ============== */
     private CharacterController characterController;
@@ -155,7 +154,7 @@ public class Player : MonoBehaviour
     }
 
     /* ============== STATS CODE ============== */
-    public void TakeDamage(int _damage){
+    public void TakeDamage(int _damage, bool _isCritical){
         // Reduce the current health by the amount of damage sustained.
         currentHealth -= _damage;
 
@@ -164,7 +163,7 @@ public class Player : MonoBehaviour
 
         // Triggers a popup text with the amount of damage sustained.
         if(popupTextPrefab != null){
-            showPopupTextPrefab(_damage);
+            showPopupTextPrefab(_damage, _isCritical);
         }
     }
 
@@ -178,9 +177,9 @@ public class Player : MonoBehaviour
         expBar.SetCurrentValue(currentExperience);
     }
 
-    private void showPopupTextPrefab(int _damage){
+    private void showPopupTextPrefab(int _damage, bool _isCritical){
         // Instantiate the Popup Text Prefab and set this transform as parent.
-        GameObject popupText = Instantiate(popupTextPrefab, transform.position, Quaternion.identity, transform);
-        popupText.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _damage.ToString();
+        PopupText popupText = Instantiate(popupTextPrefab, transform.position, Quaternion.identity, transform);
+        popupText.Setup(_damage, _isCritical);
     }
 }

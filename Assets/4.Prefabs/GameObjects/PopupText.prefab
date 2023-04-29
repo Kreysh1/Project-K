@@ -253,6 +253,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 1
   offset: 2
+  normalDamageColor: {r: 1, g: 1, b: 1, a: 0}
+  criticalDamageColor: {r: 1, g: 0.007732453, b: 0, a: 1}
   mainCamera: {fileID: 0}
 --- !u!95 &3618961220115792867
 Animator:

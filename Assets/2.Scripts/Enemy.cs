@@ -1,25 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour
 {
-    public int maxHealth = 100;
-    public int currentHealth;
-    public int damage;
+    [Header("Health")]
+    [SerializeField] private int maxHealth;
+    [SerializeField] private int currentHealth;
+
+    [Header("Damage")]
+    [SerializeField] private int minDamage;
+    [SerializeField] private int maxDamage;
+    [Range(1,3)]
+    [SerializeField] private float criticalMutiplier;
+    [Range(0,100)]
+    [SerializeField] private int criticalChance;
 
     [Header("References")]
     [SerializeField] private NavMeshAgent navMeshAgent;
-    [SerializeField] private Transform target;
+    [SerializeField] private Transform target2Follow;
+
+
+    private int finalDamage;
+    private bool isCritical;
 
     private void Awake() {
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     private void Start() {
-        damage = Random.Range(10, 30);
         currentHealth = maxHealth;
     }
 
@@ -38,12 +47,26 @@ public class Enemy : MonoBehaviour
         if(other.CompareTag("Player")){
             Player player = other.GetComponent<Player>();
             if(player != null){
-                player.TakeDamage(damage);
+                CalculateDamage(minDamage, maxDamage);
+                player.TakeDamage(finalDamage, isCritical);
             }
         }
     }
 
     void ChaseTarget(){
-        navMeshAgent.SetDestination(target.position);
+        navMeshAgent.SetDestination(target2Follow.position);
+    }
+
+    private void CalculateDamage(int _minDamage, int _maxDamage){
+        // Get actual damage value.
+        finalDamage = Random.Range(_minDamage, _maxDamage);
+
+        // Check if damage is critical.
+        isCritical = Random.Range(0,100) < criticalChance ? true : false;
+
+        // Multiply damage and criticalMutiplier.
+        if(isCritical){
+            finalDamage += (int)Mathf.Round(finalDamage * criticalMutiplier);
+        }
     }
 }

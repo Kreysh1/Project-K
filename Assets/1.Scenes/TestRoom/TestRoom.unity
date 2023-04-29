@@ -18664,6 +18664,10 @@ PrefabInstance:
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 963194228}
+    - target: {fileID: 4412157526270194404, guid: dab7cbe23eab263468ceae0656ba4f77, type: 3}
+      propertyPath: popupTextPrefab
+      value: 
+      objectReference: {fileID: 8502146658172935018, guid: e1a28fdf4146d6e4e92b57d0daa6532a, type: 3}
     - target: {fileID: 6082242157637772529, guid: dab7cbe23eab263468ceae0656ba4f77, type: 3}
       propertyPath: m_Name
       value: Player
@@ -19090,6 +19094,26 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1045927064}
+    - target: {fileID: 7085580396225437253, guid: 6f3bc421b7ee7c54190fe60fd5cf7bfa, type: 3}
+      propertyPath: maxDamage
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085580396225437253, guid: 6f3bc421b7ee7c54190fe60fd5cf7bfa, type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085580396225437253, guid: 6f3bc421b7ee7c54190fe60fd5cf7bfa, type: 3}
+      propertyPath: minDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085580396225437253, guid: 6f3bc421b7ee7c54190fe60fd5cf7bfa, type: 3}
+      propertyPath: criticalChance
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085580396225437253, guid: 6f3bc421b7ee7c54190fe60fd5cf7bfa, type: 3}
+      propertyPath: criticalMutiplier
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
