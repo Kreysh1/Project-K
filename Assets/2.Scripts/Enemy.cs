@@ -34,9 +34,9 @@ public class Enemy : MonoBehaviour
 
     private void Update() {
         if(currentHealth <= 0){
-            GameObject.Destroy(this.gameObject);
+            Die();
         }
-        ChaseTarget();
+        // ChaseTarget();
     }
 
     void TakeDamage(int _damage){
@@ -45,10 +45,10 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         if(other.CompareTag("Player")){
-            Player player = other.GetComponent<Player>();
-            if(player != null){
+            StatsSystem stats = other.GetComponent<StatsSystem>();
+            if(stats != null){
                 CalculateDamage(minDamage, maxDamage);
-                player.TakeDamage(finalDamage, isCritical);
+                stats.TakeDamage(finalDamage, isCritical);
             }
         }
     }
@@ -68,5 +68,12 @@ public class Enemy : MonoBehaviour
         if(isCritical){
             finalDamage += (int)Mathf.Round(finalDamage * criticalMutiplier);
         }
+    }
+
+    private void Die(){
+        // EXECUTE DEAD ANIMATION
+
+        // OBJECT DESTROY
+        GameObject.Destroy(this.gameObject);
     }
 }

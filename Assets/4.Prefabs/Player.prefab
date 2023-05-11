@@ -271,6 +271,7 @@ GameObject:
   - component: {fileID: 4727915177970716474}
   - component: {fileID: 7616374056939732437}
   - component: {fileID: 4412157526270194404}
+  - component: {fileID: 463771076019960929}
   - component: {fileID: 7143450311492928931}
   m_Layer: 0
   m_Name: Player
@@ -358,7 +359,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6082242157637772529}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ea01668f4d523b4ba3c3f262d08c138, type: 3}
+  m_Script: {fileID: 11500000, guid: ecdb64fde8990bd41ab211dbfabfc4d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 8
@@ -366,16 +367,58 @@ MonoBehaviour:
   jumpForce: 2.5
   rotationSpeed: 10
   gravity: -9.8
-  level: 1
-  experienceNeeded: 100
-  maxHealth: 100
-  maxMana: 100
   gameInput: {fileID: 0}
   cameraTransform: {fileID: 0}
+--- !u!114 &463771076019960929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6082242157637772529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a109629484a2dc4eb3e942f6162b347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  STR: 10
+  DEX: 7
+  CON: 10
+  INT: 3
+  SPR: 5
+  level: 1
+  experienceNeeded: 100
+  maxHealth: 0
+  maxMana: 0
+  minDamage: 0
+  maxDamage: 0
+  minMagicDamage: 0
+  maxMagicDamage: 0
+  defense: 0
+  magicDefense: 0
+  evasion: 0
+  aim: 0
+  criticalMultiplier: 1
+  attackSpeed: 1
+  bonusSTR: 10
+  bonusDEX: 6
+  bonusCON: 7
+  bonusINT: 8
+  bonusSPR: 9
+  bonusHealth: 0
+  bonusMana: 0
+  bonusDamage: 0
+  bonusMagicDamage: 0
+  bonusDefense: 0
+  bonusMagicDefense: 0
+  bonusEvasion: 0
+  bonusAim: 0
+  criticalChance: 0
+  blockChance: 0
   healthBar: {fileID: 0}
   manaBar: {fileID: 0}
   expBar: {fileID: 0}
-  popupTextPrefab: {fileID: 5523602456674391313, guid: e1a28fdf4146d6e4e92b57d0daa6532a, type: 3}
+  popupTextPrefab: {fileID: 8502146658172935018, guid: e1a28fdf4146d6e4e92b57d0daa6532a, type: 3}
 --- !u!136 &7143450311492928931
 CapsuleCollider:
   m_ObjectHideFlags: 0

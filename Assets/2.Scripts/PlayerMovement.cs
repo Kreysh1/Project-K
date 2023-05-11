@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CharacterController))]
-public class Player : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     /* ============== INSPECTOR MOVEMENT ============== */
     [Header("Movement")]
@@ -23,22 +23,11 @@ public class Player : MonoBehaviour
     [Tooltip("Gravity Acceleration")]
     [SerializeField] private float gravity = -9.8f;
 
-    /* ============== INSPECTOR STATS ============== */
-    [Header("Statistics")]
-    [SerializeField] private int level = 1;
-    [SerializeField] private int experienceNeeded = 100;
-    [SerializeField] private int maxHealth = 100;
-    [SerializeField] private int maxMana = 100;
-
     /* ============== INSPECTOR REFERENCES ============== */
     [Header("References")]
     [SerializeField] private GameInput gameInput;
     [SerializeField] private Transform cameraTransform;
-    [SerializeField] private ProgressBar healthBar;
-    [SerializeField] private ProgressBar manaBar;
-    [SerializeField] private ProgressBar expBar;
-    [SerializeField] private PopupText popupTextPrefab;
-
+    
     /* ============== PLAYER COMPONENTS ============== */
     private CharacterController characterController;
     private Rigidbody playerRigidBody;
@@ -49,9 +38,7 @@ public class Player : MonoBehaviour
     private Vector3 camRight;
     private Vector3 camForward;
     private float fallVelocity;
-    private int currentHealth;
-    private int currentMana;
-    private int currentExperience = 0;
+    
 
     /* ============== ANIMATION BOOLEANS ============== */
     private bool isWalking;
@@ -61,16 +48,7 @@ public class Player : MonoBehaviour
     private void Awake() {
         characterController = GetComponent<CharacterController>();
         playerRigidBody = GetComponent<Rigidbody>();
-        playerInput = GetComponent<PlayerInput>();
-    }
-
-    private void Start() {
-        // Initialize Health
-        currentHealth = maxHealth;
-        if(healthBar) healthBar.SetMaxValue(maxHealth);
-        // Initialize Mana
-        currentMana = maxMana;
-        if(manaBar) manaBar.SetMaxValue(maxMana);
+        playerInput = GetComponent<PlayerInput>();  
     }
 
     private void Update() {
@@ -151,35 +129,5 @@ public class Player : MonoBehaviour
 
     public bool IsGrounded(){
         return isGrounded;
-    }
-
-    /* ============== STATS CODE ============== */
-    public void TakeDamage(int _damage, bool _isCritical){
-        // Reduce the current health by the amount of damage sustained.
-        currentHealth -= _damage;
-
-        // Sets the new current health value to the health bar.
-        healthBar.SetCurrentValue(currentHealth);
-
-        // Triggers a popup text with the amount of damage sustained.
-        if(popupTextPrefab != null){
-            showPopupTextPrefab(_damage, _isCritical);
-        }
-    }
-
-    public void ConsumeMana(int _mana){
-        currentMana -= _mana;
-        manaBar.SetCurrentValue(currentMana);
-    }
-
-    public void GainExperience(int _expPoints){
-        currentExperience += _expPoints;
-        expBar.SetCurrentValue(currentExperience);
-    }
-
-    private void showPopupTextPrefab(int _damage, bool _isCritical){
-        // Instantiate the Popup Text Prefab and set this transform as parent.
-        PopupText popupText = Instantiate(popupTextPrefab, transform.position, Quaternion.identity, transform);
-        popupText.Setup(_damage, _isCritical);
     }
 }

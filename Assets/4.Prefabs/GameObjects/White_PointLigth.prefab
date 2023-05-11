@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 59958655868555919}
   - component: {fileID: 4230564157309718438}
   m_Layer: 0
-  m_Name: SlashRedLight
+  m_Name: White_PointLigth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

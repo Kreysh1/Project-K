@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -29,6 +28,7 @@ public class ProgressBar : MonoBehaviour
     public Image mask;
     public Image fill;
     public Color color;
+    public TextMeshProUGUI text;
 
     private void Start() {
         SetCurrentValue(currentValue);
@@ -48,6 +48,7 @@ public class ProgressBar : MonoBehaviour
 
         // float fillAmount = (float)currentValue/(float)maxValue;
         // mask.fillAmount = fillAmount;
+        text.SetText(currentValue + "/" + maxValue);
     }
 
     public void SetCurrentValue(int _currentValue){
