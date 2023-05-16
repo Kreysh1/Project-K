@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,12 +9,17 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     [Tooltip("Move Speed of the character")]
     [SerializeField] private float walkSpeed = 8f;
+
     [Tooltip("Run Speed of the character")]
     [SerializeField] private float runSpeed = 12f;
+
     [Tooltip("How much character can jump")]
     [SerializeField] private float jumpForce = 2.5f;
-    [Tooltip("How fast the character turns to face movement direction")][Range(3f, 10f)]
+
+    [Tooltip("How fast the character turns to face movement direction")]
+    [Range(3f, 10f)]
     [SerializeField] private float rotationSpeed = 10f;
+
     [Tooltip("Gravity Acceleration")]
     [SerializeField] private float gravity = -9.8f;
 
@@ -36,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 camForward;
     private float fallVelocity;
     
+
     /* ============== ANIMATION BOOLEANS ============== */
     private bool isWalking;
     private bool isJumping;
